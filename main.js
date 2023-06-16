@@ -42,27 +42,54 @@ const pAequorFactory = (specimenNum, dna) => {
     compareDNA(specimenCompare) {
       let matchedBases = 0;
       for (let i = 0; i < this.dna.length; i++) {
-          if (this.dna[i] === specimenCompare.dna[i]) {
-            matchedBases++;
-          }
+        if (this.dna[i] === specimenCompare.dna[i]) {
+          matchedBases++;
         }
-      let sharedBasePercentage = Math.round((matchedBases /= 15) * 100);
-      console.log(`${this.specimenNum} and ${specimenCompare.specimenNum} have ${sharedBasePercentage}% DNA in common.`)
+        }
+          let sharedBasePercentage = Math.round((matchedBases /= 15) * 100);
+          console.log(`${this.specimenNum} and ${specimenCompare.specimenNum} have ${sharedBasePercentage}% DNA in common.`)
+        },
+
+    willLikelySurvive() {
+      let preferredBases = 0;
+      for (let i = 0; i < this.dna.length; i++) {
+        if (this.dna[i] === 'C' || this.dna[i] === 'G') {
+          preferredBases++;
+          // console.log(preferredBases);
+        }
       }
-    }
+      return ((preferredBases /= this.dna.length) >= .6) 
+    },
   }
-//factory test
-  console.log(pAequorFactory(1, mockUpStrand()));
+}
 
-//mutation test
-  const aequorSpec = pAequorFactory(1, mockUpStrand());
-  console.log(aequorSpec);
-  aequorSpec.mutate();
-  console.log(aequorSpec);
+const pAequorSurvivors = [];
+let id = 1;
+while (pAequorSurvivors.length < 30) {
+  let newSpec = pAequorFactory(id, mockUpStrand());
+  if (newSpec.willLikelySurvive()) {
+    pAequorSurvivors.push(newSpec)
+  }
+  id++;
+}
 
-//compareDNA test
-  const aequorSpec1 = pAequorFactory(1, mockUpStrand());
-  const aequorSpec2 = pAequorFactory(2, mockUpStrand());
-  aequorSpec.compareDNA(aequorSpec2) 
+// //factory test
+//   console.log(pAequorFactory(1, mockUpStrand()));
 
+// //mutation test
+//   const aequorSpec = pAequorFactory(1, mockUpStrand());
+//   console.log(aequorSpec);
+//   aequorSpec.mutate();
+//   console.log(aequorSpec);
 
+// //compareDNA test
+//   const aequorSpec1 = pAequorFactory(1, mockUpStrand());
+//   const aequorSpec2 = pAequorFactory(2, mockUpStrand());
+//   aequorSpec.compareDNA(aequorSpec2) 
+
+// willLikelySurvive test
+//  const aequorSpec3 = pAequorFactory(3, mockUpStrand());
+//  console.log(aequorSpec3);
+//  console.log(aequorSpec3.willLikelySurvive());
+
+console.log(pAequorSurvivors);
