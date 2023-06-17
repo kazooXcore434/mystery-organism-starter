@@ -60,6 +60,26 @@ const pAequorFactory = (specimenNum, dna) => {
       }
       return ((preferredBases /= this.dna.length) >= .6) 
     },
+
+    //challenge task
+    complementStrand() {
+      let complementaryStrand = [];
+      for (let i = 0; i < this.dna.length; i++) {
+        if (this.dna[i] === 'A') {
+          complementaryStrand.push('T')
+        }
+        if (this.dna[i] === 'T') {
+          complementaryStrand.push('A')
+        }     
+        if (this.dna[i] === 'C') {
+          complementaryStrand.push('G')
+        }
+        if (this.dna[i] === 'G') {
+          complementaryStrand.push('C')
+        }
+        console.log(`Complementary DNA strand: ${complementaryStrand}`)
+      }
+    },
   }
 }
 
@@ -92,4 +112,10 @@ while (pAequorSurvivors.length < 30) {
 //  console.log(aequorSpec3);
 //  console.log(aequorSpec3.willLikelySurvive());
 
-console.log(pAequorSurvivors);
+// specimen generation test
+// console.log(pAequorSurvivors);
+
+// challenge task test
+  const aequorSpec = pAequorFactory(1, mockUpStrand());
+  aequorSpec.complementStrand;
+  
