@@ -77,8 +77,8 @@ const pAequorFactory = (specimenNum, dna) => {
         if (this.dna[i] === 'G') {
           complementaryStrand.push('C')
         }
-        console.log(`Complementary DNA strand: ${complementaryStrand}`)
       }
+      console.log(`Complementary DNA strand: ${complementaryStrand}`)
     },
   }
 }
@@ -117,5 +117,6 @@ while (pAequorSurvivors.length < 30) {
 
 // challenge task test
   const aequorSpec = pAequorFactory(1, mockUpStrand());
-  aequorSpec.complementStrand;
+  console.log(aequorSpec);
+  aequorSpec.complementStrand();
   
